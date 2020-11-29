@@ -25,28 +25,28 @@
 
 <script>
 export default {
-  name: "app",
+  name: 'app',
   data: () => {
     return {
       imageUrl:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
-      apiUrl: "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=300",
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
+      apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=300',
       pokemons: [],
-      pokemonUrl: "",
-      showDetail: false,
+      pokemonUrl: '',
+      showDetail: false
     };
   },
   methods: {
     fetchData() {
       let req = new Request(this.apiUrl);
       fetch(req)
-        .then((resp) => {
+        .then(resp => {
           if (resp.status === 200) return resp.json();
         })
-        .then((data) => {
-          data.results.forEach((pokemon) => {
+        .then(data => {
+          data.results.forEach(pokemon => {
             pokemon.id = pokemon.url
-              .split("/")
+              .split('/')
               .filter(function(part) {
                 return !!part;
               })
@@ -54,14 +54,14 @@ export default {
             this.pokemons.push(pokemon);
           });
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
-    },
+    }
   },
   created() {
     this.currentUrl = this.apiUrl;
     this.fetchData();
-  },
+  }
 };
 </script>
